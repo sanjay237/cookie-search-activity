@@ -228,9 +228,13 @@ class Game():
         spr.set_shape(self._new_dot(self._colors[spr.type]))
 
         counter = self._count([2, 4], spr)
+        
         if self.we_are_sharing:
             _logger.debug('sending a click to the share')
-            self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
+            if counter > 0:
+                self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
+            else:
+                self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
 
         if counter > 0:
             spr.set_label(str(counter))

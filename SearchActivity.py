@@ -226,7 +226,6 @@ class SearchActivity(activity.Activity):
     def _receive_new_game(self, payload):
         ''' Sharer can start a new game. '''
         print('recieved game.')
-        self._all_clear()
         dot_list = payload
         self._game.restore_game(dot_list)
 
