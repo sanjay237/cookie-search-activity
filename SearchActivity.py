@@ -29,7 +29,7 @@ import json
 from json import load as jload
 from json import dump as jdump
 
-from io import StringIO1
+from io import StringIO
 
 from game import Game
 
