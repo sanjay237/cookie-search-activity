@@ -29,7 +29,7 @@ import json
 from json import load as jload
 from json import dump as jdump
 
-from io import StringIO
+from io import StringIO1
 
 from game import Game
 
@@ -231,9 +231,7 @@ class SearchActivity(activity.Activity):
 
     def send_dot_click(self, dot, color):
         ''' Send a dot click to all the players '''
-        # print('sending dot click, for dot: {} and color: {}'.format(dot, color))
         self.send_event('p', json_dump([dot, color]))
-        # self.send_event('p|{}'.format(json_dump([dot, color])))
         
     def _receive_dot_click(self, payload):
         ''' When a dot is clicked, everyone should change their color. '''
