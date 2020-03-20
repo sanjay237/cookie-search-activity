@@ -234,7 +234,7 @@ class Game():
             if counter > 0:
                 self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
             else:
-                self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
+                self._parent.send_dot_click(self._dots.index(spr), spr.type)
 
         if counter > 0:
             spr.set_label(str(counter))
