@@ -291,6 +291,7 @@ class Game():
                     return True
 
         if spr.type in [2, 4]:
+            print('going to frown')
             spr.set_shape(self._new_dot(self._colors[4]))
             self._frown()
             return True
