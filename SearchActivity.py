@@ -229,13 +229,13 @@ class SearchActivity(activity.Activity):
         dot_list = payload
         self._game.restore_game(dot_list)
 
-    def send_dot_click(self, dot, color):
+    def send_dot_click(self, dot, color, label):
         ''' Send a dot click to all the players '''
-        self.send_event('p', json_dump([dot, color]))
+        self.send_event('p', json_dump([dot, color, label]))
         
     def _receive_dot_click(self, payload):
         ''' When a dot is clicked, everyone should change their color. '''
-        (dot, color) = json_load(payload)
+        (dot, color, label) = json_load(payload)
         # print('recieved dot click, for dot: {} and color: {}'.format(dot, color))
         self._game.remote_button_press(dot, color)
 

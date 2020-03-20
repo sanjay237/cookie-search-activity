@@ -226,11 +226,12 @@ class Game():
 
         spr.type = 0
         spr.set_shape(self._new_dot(self._colors[spr.type]))
-        if self.we_are_sharing:
-            _logger.debug('sending a click to the share')
-            self._parent.send_dot_click(self._dots.index(spr), spr.type)
 
         counter = self._count([2, 4], spr)
+        if self.we_are_sharing:
+            _logger.debug('sending a click to the share')
+            self._parent.send_dot_click(self._dots.index(spr), spr.type, counter)
+
         if counter > 0:
             spr.set_label(str(counter))
         else:
@@ -277,30 +278,11 @@ class Game():
             spr.type -= 2
         self._test_game_over()
 
-    def remote_button_press(self, dot, color):
+    def remote_button_press(self, dot, color, label = ''):
         ''' Receive a button press from a sharer '''
         self._dots[dot].type = color
         self._dots[dot].set_shape(self._new_dot(self._colors[color]))
-
-        spr = self._sprites.get_sprite(dot)
-
-        if spr.type != 0:
-                red, green, blue, alpha = spr.get_pixel((x, y))
-                if red > 190 and red < 215:  # clicked the cookie
-                    self._flip_the_cookie(spr)
-                    return True
-
-        if spr.type in [2, 4]:
-            print('going to frown')
-            spr.set_shape(self._new_dot(self._colors[4]))
-            self._frown()
-            return True
-
-        if spr.type is not None:
-            self._floodfill([1, 3], spr)
-            self._test_game_over()
-
-        return True
+        self._dots[dot].set_label(label)
 
     def set_sharing(self, share=True):
         _logger.debug('enabling sharing')
