@@ -230,7 +230,7 @@ class Game():
         counter = self._count([2, 4], spr)
         if self.we_are_sharing:
             _logger.debug('sending a click to the share')
-            self._parent.send_dot_click(self._dots.index(spr), spr.type, counter)
+            self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
 
         if counter > 0:
             spr.set_label(str(counter))
