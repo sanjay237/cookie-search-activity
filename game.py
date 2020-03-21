@@ -229,19 +229,16 @@ class Game():
 
         counter = self._count([2, 4], spr)
         
-        if self.we_are_sharing:
-            _logger.debug('sending a click to the share')
-            if counter > 0:
-                self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
-            else:
-                self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
-
         if counter > 0:
             spr.set_label(str(counter))
-        else:
-            spr.set_label('')
-            for dot in self._neighbors(spr):
-                self._floodfill(old_type, dot)
+            if self.we_are_sharing:
+                _logger.debug('sending a click to the share')
+                self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
+            else:
+                spr.set_label('')
+                self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
+                for dot in self._neighbors(spr):
+                    self._floodfill(old_type, dot)                
 
     def _button_press_cb(self, win, event):
         win.grab_focus()
