@@ -286,7 +286,6 @@ class Game():
         ''' Receive a button press from a sharer '''
         self._dots[dot].type = color
         self._dots[dot].set_shape(self._new_dot(self._colors[color]))
-        print('setting dot {} with label {}'.format(dot, label))
         self._dots[dot].set_label(label)
 
     def set_sharing(self, share=True):
