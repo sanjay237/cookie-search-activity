@@ -230,13 +230,13 @@ class Game():
         
         if counter > 0:
             spr.set_label(str(counter))
-            if self.we_are_sharing:
-                _logger.debug('sending a click to the share')
-                self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
+            # if self.we_are_sharing:
+            #     _logger.debug('sending a click to the share')
+            #     self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
         else:
             spr.set_label('')
-            if self.we_are_sharing:
-                self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
+            # if self.we_are_sharing:
+            #     self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
             for dot in self._neighbors(spr):
                 self._floodfill(old_type, dot)
 
@@ -282,6 +282,7 @@ class Game():
     def remote_button_press(self, dot, color, label = ''):
         ''' Receive a button press from a sharer '''
         spr = self._dots[dot]
+        print('dot {} of type {}'.format(dot, spr.type))
         if spr.type != 0:
             self._flip_the_cookie(spr)
         if spr.type in [2, 4]:
