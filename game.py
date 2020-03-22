@@ -226,7 +226,6 @@ class Game():
 
         spr.type = 0
         spr.set_shape(self._new_dot(self._colors[spr.type]))
-
         counter = self._count([2, 4], spr)
         
         if counter > 0:
@@ -234,11 +233,12 @@ class Game():
             if self.we_are_sharing:
                 _logger.debug('sending a click to the share')
                 self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
-            else:
-                spr.set_label('')
+        else:
+            spr.set_label('')
+            if self.we_are_sharing:
                 self._parent.send_dot_click(self._dots.index(spr), spr.type, '')
-                for dot in self._neighbors(spr):
-                    self._floodfill(old_type, dot)                
+            for dot in self._neighbors(spr):
+                self._floodfill(old_type, dot)
 
     def _button_press_cb(self, win, event):
         win.grab_focus()
