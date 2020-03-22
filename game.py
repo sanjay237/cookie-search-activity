@@ -281,9 +281,18 @@ class Game():
 
     def remote_button_press(self, dot, color, label = ''):
         ''' Receive a button press from a sharer '''
-        self._dots[dot].type = color
-        self._dots[dot].set_shape(self._new_dot(self._colors[color]))
-        self._dots[dot].set_label(label)
+        spr = self._dots[dot]
+        if spr.type != 0:
+            self._flip_the_cookie(spr)
+        if spr.type in [2, 4]:
+            spr.set_shape(self._new_dot(self._colors[4]))
+            self._frown()
+        if spr.type is not None:
+            self._floodfill([1, 3], spr)
+            self._test_game_over()
+        # self._dots[dot].type = color
+        # self._dots[dot].set_shape(self._new_dot(self._colors[color]))
+        # self._dots[dot].set_label(label)
 
     def set_sharing(self, share=True):
         _logger.debug('enabling sharing')
