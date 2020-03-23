@@ -268,6 +268,13 @@ class Game():
             self._floodfill([1, 3], spr)
             self._test_game_over()
 
+        if self.we_are_sharing():
+            _logger.debug('sending a click to the share')
+            self._parent.send_dot_click(self._dots.index(spr), spr.type)
+                        # if self.we_are_sharing:
+            #     _logger.debug('sending a click to the share')
+            #     self._parent.send_dot_click(self._dots.index(spr), spr.type, str(counter))
+
         return True
 
     def _flip_the_cookie(self, spr):
@@ -279,7 +286,7 @@ class Game():
             spr.type -= 2
         self._test_game_over()
 
-    def remote_button_press(self, dot, color, label = ''):
+    def remote_button_press(self, dot, color):
         ''' Receive a button press from a sharer '''
         spr = self._dots[dot]
         print('dot {} of type {}'.format(dot, spr.type))
